@@ -1,9 +1,37 @@
   * {
-    padding: 0;
-    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
   }
 
   body {
     margin: 0 9%;
+  }
+
+  #media-wrapper {
+    display: flex;
+    width: 500px;
+  }
+
+  /* Instagram POST */
+
+  .post {
+      display: inline-block;
+      width: 200px;
+      height: 300px;
+      margin: 16px 8px;
+  }
+  .post_link {
+  }
+
+  .image {
+    width: 200px;
+    height: 200px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px;
+  }
+
+  .caption_text {
+    max-width: 100%;
+    padding: 10px 5px;
+    display: block;
+
   }
