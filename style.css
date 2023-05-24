@@ -9,29 +9,49 @@
 
   #media-wrapper {
     display: flex;
-    width: 500px;
+    width: 100%;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
   }
 
   /* Instagram POST */
-
   .post {
       display: inline-block;
       width: 200px;
-      height: 300px;
-      margin: 16px 8px;
-  }
+      /* height: 275px; */
+      margin: 16px 16px 16px 0;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px;
+      border-radius: 8px;
+      transform: scale(1);
+      transition: all .5s ease-out;
+    }
+    .post:hover {
+      transform: scale(1.05);
+    }
+
   .post_link {
+    text-decoration: none;
+    color: #171717;
+    font-size: 14px;
+    font-weight: 500;
+    text-overflow: ellipsis;
   }
 
   .image {
     width: 200px;
     height: 200px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px;
+    border-radius: 8px 8px 0 0;
   }
 
   .caption_text {
-    max-width: 100%;
-    padding: 10px 5px;
     display: block;
-
+    width: 200px;
+    margin: 0;
+    padding: 16px 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
