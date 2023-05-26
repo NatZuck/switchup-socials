@@ -1,4 +1,4 @@
-const key = "IGQVJVOXZAFRUh3ZAWVfUVhsVEtsQjQxS3o2TFFvRXEyTzRmNVgweENXNDQ5T0RWN2dtWUtwVjEtNUNTZAWxsU1pXdF9pX1N0WERuZAG4wTnFtSkZAlcU5PcFlpVFFYVHlCVGVNLWtOUUtoazVJY3UyYWFoVQZDZD"
+const key = ""
 
 // Get and display PROFILE
 const displayProfileData = (profileData) => {
