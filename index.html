@@ -11,20 +11,84 @@
     <section class="instagram">
         <h1>Instagram</h1>
         <h3>Profilo:</h3>
-        <p>Username: <span id="username"></span></p>
-        <p>ID: <span id="id"></span></p>
+        <p>Username: <span id="username_ig"></span></p>
+        <p>ID: <span id="id_ig"></span></p>
 
         <h3>Contenuti:</h3>
-        <div id="media-wrapper">
+        <div class="media_wrapper" id="media_wrapper_ig">
+
+        </div>
+    </section>
+
+    <section class="facebook">
+        
+        <h1>Facebook</h1>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+        <h3>Profilo:</h3>
+        <p>Username: <span id="username_fb"></span></p>
+        <p>ID: <span id="id_fb"></span></p>
+
+        <h3>Contenuti:</h3>
+        <div class="media_wrapper" id="media_wrapper_fb">
+
+        </div>
+    </section>
+    
+
+    <section class="linkedin">
+        <h1>Linkedin</h1>
+        <h3>Profilo:</h3>
+        <p>Username: <span id="username_li"></span></p>
+        <p>ID: <span id="id_li"></span></p>
+
+        <h3>Contenuti:</h3>
+
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7055495867700510720" height="788" width="504" frameborder="0" allowfullscreen="" title="Post incorporato"></iframe>
+
+        <div id="media_wrapper_li">
 
         </div>
     
         
     </section>
     
+    <!-- SDK -->
+    <script>
+
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '{your-app-id}',
+            cookie     : true,
+            xfbml      : true,
+            version    : '{api-version}'
+          });
+            
+          FB.AppEvents.logPageView();   
+
+          FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+                console.log(response);
+            });
+            
+        };
+      
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+
+
+         
+        function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+        }
+    </script>
     
-    <div class="policy">This website is just a demo to show how to embed data inside of a website using the official Meta, TikTok and LinkedIn APIs, so no data is being recorded about the users or their actions on this website.</div>
-    
-    <script src="script.js"></script>
+    <script type="module" src="script.js" ></script>
 </body>
 </html>

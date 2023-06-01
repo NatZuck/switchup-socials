@@ -1,3 +1,52 @@
+  /* Vite */
+  :root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+  
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+  }
+  a:hover {
+    color: #535bf2;
+  }
+
+  
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+
+  
+  @media (prefers-color-scheme: light) {
+    :root {
+      color: #171717;
+      background-color: #ffffff;
+    }
+    a:hover {
+      color: #747bff;
+    }
+    button {
+      background-color: #f9f9f9;
+    }
+  }
+  
+  
+  
+  /* Socials */
   * {
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
@@ -7,7 +56,7 @@
     margin: 0 9%;
   }
 
-  #media-wrapper {
+  .media_wrapper {
     display: flex;
     width: 100%;
   }
@@ -18,7 +67,7 @@
   }
 
   /* Instagram POST */
-  .post {
+  .post_ig {
       display: inline-block;
       width: 200px;
       /* height: 275px; */
@@ -28,11 +77,11 @@
       transform: scale(1);
       transition: all .5s ease-out;
     }
-    .post:hover {
+    .post_ig:hover {
       transform: scale(1.05);
     }
 
-  .post_link {
+  .post_link_ig {
     text-decoration: none;
     color: #171717;
     font-size: 14px;
