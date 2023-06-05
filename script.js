@@ -17,10 +17,10 @@ const displayProfileData = (profileData) => {
 const getProfile = async () => {
     const url = `https://graph.instagram.com/me?fields=id,username&access_token=${keyIG}`
     
-    const data = await fetch(url)
-    const profile = await data.json()
+    // const data = await fetch(url)
+    // const profile = await data.json()
 
-    displayProfileData(profile)
+    // displayProfileData(profile)
 
 }
 
@@ -56,10 +56,10 @@ const getMedia = async () => {
 
     const url = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp,thumbnail_url,is_shared_to_feed&access_token=${keyIG}`
     
-    const data = await fetch(url)
-    const profile = await data.json()
+    // const data = await fetch(url)
+    // const profile = await data.json()
 
-    displayMedia(profile)
+    // displayMedia(profile)
 
 }
 
@@ -92,7 +92,7 @@ const getProfileFb = async () => {
     displayProfileDataFb(profile)
 
 }
-getProfileFb()
+// getProfileFb()
 
 
 // Get and display FB MEDIA
@@ -104,31 +104,31 @@ const displayMediaFb = async (object) => {
 
     
     
-    for (let i = 0; i < object.posts.data.length; i++) {
-        const post = object.posts.data[i]
+    // for (let i = 0; i < object.posts.data.length; i++) {
+    //     const post = object.posts.data[i]
 
-        const url = `https://graph.facebook.com/${post.id}?fields=permalink_url,caption,description,link,name,object_id,source,type&access_token=${keyFB}`
-        const data = await fetch(url)
-        const postData = await data.json()
-        console.log(postData);
+    //     const url = `https://graph.facebook.com/${post.id}?fields=permalink_url,caption,description,link,name,object_id,source,type&access_token=${keyFB}`
+    //     const data = await fetch(url)
+    //     const postData = await data.json()
+    //     console.log(postData);
 
-        const postDiv = document.createElement("div")
-        postDiv.className = "post_fb post"
-        postDiv.innerHTML = `
-        <a class="post_link_fb post_link" target="_blank" href="${postData.permalink_url}" >
-            <p class="text">Text</p>
-        </a>`
-        row.appendChild(postDiv)
-    }
+    //     const postDiv = document.createElement("div")
+    //     postDiv.className = "post_fb post"
+    //     postDiv.innerHTML = `
+    //     <a class="post_link_fb post_link" target="_blank" href="${postData.permalink_url}" >
+    //         <p class="text">Text</p>
+    //     </a>`
+    //     row.appendChild(postDiv)
+    // }
 
 }
 
 const getMediaFb = async () => {
     const url = `https://graph.facebook.com/me?fields=name,posts&access_token=${keyFB}`
-    const data = await fetch(url)
-    const profile = await data.json()
+    // const data = await fetch(url)
+    // const profile = await data.json()
 
-    displayMediaFb(profile)
+    // displayMediaFb(profile)
 }
 
 getMediaFb()
@@ -153,6 +153,7 @@ getMediaLinkedin()
 
 
 // async function main() {
+    
 //   const restliClient = new RestliClient();
 //   restliClient.setDebugParams({ enabled: true });
 //   const accessToken = import.meta.env.VITE_ACCESS_TOKEN || '';
@@ -201,3 +202,49 @@ getMediaLinkedin()
 //   .catch((error) => {
 //     console.log(`Error encountered: ${error.message}`);
 //   });
+
+
+
+
+
+/**
+ * ----------------- TIKTOK -----------------
+*/
+
+// const express = require('express');
+// const fetch = require('node-fetch');
+// const cookieParser = require('cookie-parser');
+// const cors = require('cors');
+
+// import express from "express"
+// import fetch from "node-fetch"
+import cookieParser from "cookie-parser"
+import cors from "cors"
+
+const app = express;
+
+app.use(cookieParser());
+app.use(cors());
+app.listen(process.env.PORT || 5000)
+
+const url = 'https://www.tiktok.com/v2/auth/authorize/client_key=aw4uv5g4eat1jc2m&scope=user.info.basic&response_type=code&redirect_uri=switchup-socials.vercel.app'
+
+const CLIENT_KEY = 'aw4uv5g4eat1jc2m' // this value can be found in app's developer portal
+const SERVER_ENDPOINT_REDIRECT = 'https://switchup-socials.vercel.app/'
+app.get('/oauth', (req, res) => {
+    const csrfState = Math.random().toString(36).substring(2);
+    res.cookie('csrfState', csrfState, { maxAge: 60000 });
+
+    let url = 'https://www.tiktok.com/v2/auth/authorize/';
+
+    // the following params need to be in `application/x-www-form-urlencoded` format.
+    url += `?client_key=${CLIENT_KEY}`;
+    url += '&scope=user.info.basic';
+
+    url += '&response_type=code';
+    url += `&redirect_uri=${SERVER_ENDPOINT_REDIRECT}`;
+    url += '&state=' + csrfState;
+
+    res.redirect(url);
+})
+

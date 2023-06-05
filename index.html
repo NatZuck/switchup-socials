@@ -33,6 +33,19 @@
 
         </div>
     </section>
+
+    <section class="tiktok">
+        <h1>TikTok</h1>
+        <a href='{SERVER_ENDPOINT_OAUTH}'>Continue with TikTok</a>
+        <h3>Profilo:</h3>
+        <p>Username: <span id="username_tt"></span></p>
+        <p>ID: <span id="id_tt"></span></p>
+
+        <h3>Contenuti:</h3>
+        <div class="media_wrapper" id="media_wrapper_tt">
+
+        </div>
+    </section>
     
 
     <section class="linkedin">
@@ -53,7 +66,7 @@
     </section>
     
     <!-- SDK -->
-    <script>
+    <!-- <script>
 
         window.fbAsyncInit = function() {
           FB.init({
@@ -87,7 +100,7 @@
             statusChangeCallback(response);
         });
         }
-    </script>
+    </script> -->
     
     <script type="module" src="script.js" ></script>
 </body>
