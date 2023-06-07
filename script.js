@@ -228,7 +228,7 @@ const body = {
     'client_secret': '2bc9e6ae30e0ccf31e7ff25bdc21b1e0',
     'code': `${code}`,
     'grant_type': 'authorization_code',
-    'redirect_uri': 'https://switchup-socials.vercel.app/'
+    'redirect_uri': `https://switchup-socials.vercel.app/?code=${code}&scopes=user.info.basic%2Cvideo.list&state=200`
 }
 
 const getAccessToken = async () => {
