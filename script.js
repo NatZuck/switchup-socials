@@ -219,7 +219,9 @@ const url = "https://open.tiktokapis.com/v2/oauth/token/"
 const header = {
     'Content-Type': 'application/x-www-form-urlencoded',
     'Cache-Control': 'no-cache',
-    'Access-Control-Allow-Origin': 'null'
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
 }
 const body = {
     'client_key': 'aw4uv5g4eat1jc2m',
