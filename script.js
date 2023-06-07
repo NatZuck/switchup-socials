@@ -210,41 +210,36 @@ getMediaLinkedin()
 /**
  * ----------------- TIKTOK -----------------
 */
+const queryString = window.location.search
+const params = new URLSearchParams(queryString)
+const code = params.get('code')
+    console.log(`Autherization Code: ${code}`);
 
-// const express = require('express');
-// const fetch = require('node-fetch');
-// const cookieParser = require('cookie-parser');
-// const cors = require('cors');
+const url = "https://open.tiktokapis.com/v2/oauth/token/"
+const header = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Cache-Control': 'no-cache'
+}
+const body = {
+    'client_key': 'aw4uv5g4eat1jc2m',
+    'client_secret': '2bc9e6ae30e0ccf31e7ff25bdc21b1e0',
+    'code': `${code}`,
+    'grant_type': 'authorization_code',
+    'redirect_uri': 'https://switchup-socials.vercel.app/'
+}
 
-// import express from "express"
-// import fetch from "node-fetch"
-import cookieParser from "cookie-parser"
-import cors from "cors"
+const getAccessToken = async () => {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: header,
+        body: body
+    })
 
-const app = express;
+    data = await response.json()
+    console.log(data);
 
-app.use(cookieParser());
-app.use(cors());
-app.listen(process.env.PORT || 5000)
+    const accessToken = data.access_token
+    console.log(`Access Token: ${accessToken}`);
+} 
 
-const url = 'https://www.tiktok.com/v2/auth/authorize/client_key=aw4uv5g4eat1jc2m&scope=user.info.basic&response_type=code&redirect_uri=switchup-socials.vercel.app'
-
-const CLIENT_KEY = 'aw4uv5g4eat1jc2m' // this value can be found in app's developer portal
-const SERVER_ENDPOINT_REDIRECT = 'https://switchup-socials.vercel.app/'
-app.get('/oauth', (req, res) => {
-    const csrfState = Math.random().toString(36).substring(2);
-    res.cookie('csrfState', csrfState, { maxAge: 60000 });
-
-    let url = 'https://www.tiktok.com/v2/auth/authorize/';
-
-    // the following params need to be in `application/x-www-form-urlencoded` format.
-    url += `?client_key=${CLIENT_KEY}`;
-    url += '&scope=user.info.basic';
-
-    url += '&response_type=code';
-    url += `&redirect_uri=${SERVER_ENDPOINT_REDIRECT}`;
-    url += '&state=' + csrfState;
-
-    res.redirect(url);
-})
-
+getAccessToken()
