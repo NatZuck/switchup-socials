@@ -232,7 +232,7 @@ const getAccessToken = async () => {
     const response = await fetch(url, {
         method: 'POST',
         headers: header,
-        body: body
+        body: JSON.parse(body)
     })
 
     data = await response.json()
