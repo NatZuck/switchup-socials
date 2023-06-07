@@ -218,17 +218,14 @@ const code = params.get('code')
 const url = "https://open.tiktokapis.com/v2/oauth/token/"
 const header = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Cache-Control': 'no-cache',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    'Cache-Control': 'no-cache'
 }
 const body = {
     'client_key': 'aw4uv5g4eat1jc2m',
     'client_secret': '2bc9e6ae30e0ccf31e7ff25bdc21b1e0',
     'code': `${code}`,
     'grant_type': 'authorization_code',
-    'redirect_uri': `https://switchup-socials.vercel.app/?code=${code}&scopes=user.info.basic%2Cvideo.list&state=200`
+    'redirect_uri': 'https://switchup-socials.vercel.app'
 }
 
 const getAccessToken = async () => {
