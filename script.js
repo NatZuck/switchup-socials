@@ -218,7 +218,8 @@ const code = params.get('code')
 const url = "https://open.tiktokapis.com/v2/oauth/token/"
 const header = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Cache-Control': 'no-cache'
+    'Cache-Control': 'no-cache',
+    'Access-Control-Allow-Origin': 'https://switchup-socials.vercel.app/'
 }
 const body = {
     'client_key': 'aw4uv5g4eat1jc2m',
