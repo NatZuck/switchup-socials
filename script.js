@@ -230,14 +230,14 @@ const body = {
 
 const getAccessToken = async () => {
     const response = await fetch(url, {
-                method    : "POST",
-        mode      : "no-cors",
-        cache     : "no-cache",
-        headers   : {
-            "Content-Type"  : "application/json"
-            },
-        redirect  : "follow",
-        body      : JSON.stringify( body ),
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        redirect: "follow",
+        body: JSON.stringify( body ),
     })
 
     data = await response.json()
