@@ -17,10 +17,10 @@ const displayProfileData = (profileData) => {
 const getProfile = async () => {
     const url = `https://graph.instagram.com/me?fields=id,username&access_token=${keyIG}`
     
-    // const data = await fetch(url)
-    // const profile = await data.json()
+    const data = await fetch(url)
+    const profile = await data.json()
 
-    // displayProfileData(profile)
+    displayProfileData(profile)
 
 }
 
@@ -56,10 +56,10 @@ const getMedia = async () => {
 
     const url = `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,timestamp,thumbnail_url,is_shared_to_feed&access_token=${keyIG}`
     
-    // const data = await fetch(url)
-    // const profile = await data.json()
+    const data = await fetch(url)
+    const profile = await data.json()
 
-    // displayMedia(profile)
+    displayMedia(profile)
 
 }
 
@@ -97,27 +97,39 @@ window.fbAsyncInit = function() {
 
   //  API --------------------------------------------------
 
-  const getSinglePostsFb = async (accessToken, postsArray) => {
+const getSinglePostsFb = async (accessToken, postsArray) => {
 
     for (let i = 0; i < postsArray.length; i++) {
         const postId = postsArray[i].id;
         
-        const url = `https://graph.facebook.com/${postId}?fields=caption&access_token=${accessToken}`
+        const url = `https://graph.facebook.com/${postId}?fields=actions,call_to_action,caption,child_attachments,created_time,is_hidden,is_published,link,message,message_tags,permalink_url,privacy,shares,source,type&access_token=${accessToken}`
         const data = await fetch(url)
         const post = await data.json()
 
-        console.log(post.caption);
+        console.log(post.created_time);
+
+        const mediaWrapper = document.getElementById("media_wrapper_fb")
+        const row = document.createElement("div")
+        row.className = "row"
+        mediaWrapper.appendChild(row)
+        const postDiv = document.createElement("div")
+        postDiv.className = "post_fb post"
+        postDiv.innerHTML = `
+        <a class="post_link_fb post_link" target="_blank" href="${post.permalink_url}" >
+            <p class="text">Text</p>
+        </a>`
+        row.appendChild(postDiv)
     }
-    }
+}
 
   const getPostsFb = async (accessToken) => {
       const url = `https://graph.facebook.com/me?fields=posts&access_token=${accessToken}`
       const data = await fetch(url)
       const posts = await data.json()
 
-      console.log(posts);
-
+      
       const postsArray = posts.posts.data
+      console.log(postsArray);
       getSinglePostsFb(accessToken, postsArray)
       
   }
@@ -130,43 +142,12 @@ window.fbAsyncInit = function() {
 
        getPostsFb(accessToken)
 
+
       } 
       else {
           console.log('not connected');
       }
     } );
-
-
-
-
-// Get and display FB MEDIA
-const displayMediaFb = async (object) => {
-    const mediaWrapper = document.getElementById("media_wrapper_fb")
-    const row = document.createElement("div")
-    row.className = "row"
-    mediaWrapper.appendChild(row)
-
-    
-    
-    // for (let i = 0; i < object.posts.data.length; i++) {
-    //     const post = object.posts.data[i]
-
-    //     const url = `https://graph.facebook.com/${post.id}?fields=permalink_url,caption,description,link,name,object_id,source,type&access_token=${keyFB}`
-    //     const data = await fetch(url)
-    //     const postData = await data.json()
-    //     console.log(postData);
-
-    //     const postDiv = document.createElement("div")
-    //     postDiv.className = "post_fb post"
-    //     postDiv.innerHTML = `
-    //     <a class="post_link_fb post_link" target="_blank" href="${postData.permalink_url}" >
-    //         <p class="text">Text</p>
-    //     </a>`
-    //     row.appendChild(postDiv)
-    // }
-
-}
-
 
 
 
