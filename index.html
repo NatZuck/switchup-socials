@@ -99,31 +99,6 @@
      }(document, 'script', 'facebook-jssdk'));
 
 
-
-    //  API --------------------------------------------------
-    const getMediaFb = async (accessToken) => {
-        const url = `https://graph.facebook.com/me?fields=posts&access_token=${accessToken}`
-        const data = await fetch(url)
-        const posts = await data.json()
-
-        console.log(posts);
-        // displayMediaFb(profile)
-    }
-
-     FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-          var accessToken = response.authResponse.accessToken;
-          console.log(accessToken);
-
-
-         getMediaFb(accessToken)
-
-        } 
-        else {
-            console.log('not connected');
-        }
-      } );
-
   </script>
     <script type="module" src="script.js" ></script>
 </body>
