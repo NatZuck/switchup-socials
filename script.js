@@ -247,4 +247,4 @@ const getAccessToken = async () => {
     console.log(`Access Token: ${accessToken}`);
 } 
 
-getAccessToken()
+// getAccessToken()
