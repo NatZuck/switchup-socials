@@ -97,6 +97,19 @@
        js.src = "https://connect.facebook.net/en_US/sdk.js";
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
+
+
+
+     FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          var accessToken = response.authResponse.accessToken;
+          console.log(accessToken);
+        } 
+        else {
+            console.log('not connected');
+        }
+      } );
+
   </script>
     <script type="module" src="script.js" ></script>
 </body>
