@@ -71,28 +71,72 @@ getMedia()
 /**
  * ----------------- FACEBOOK -----------------
 */
-const keyFB = ""
 
-// Get and display IG PROFILE
-const displayProfileDataFb = (profileData) => {
-    const id = profileData.id
-    const username = profileData.name 
+// SDK
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
 
-    const idSpan = document.getElementById("id_fb")
-    const nameSpan = document.getElementById("username_fb")
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
 
-    idSpan.innerText = id
-    nameSpan.innerText = username
-}
-const getProfileFb = async () => {
-    const url = `https://graph.facebook.com/me?fields=id,name&access_token=${keyFB}`
-    const data = await fetch(url)
-    const profile = await data.json()
 
-    displayProfileDataFb(profile)
 
-}
-// getProfileFb()
+  //  API --------------------------------------------------
+
+  const getSinglePostsFb = async (accessToken, postsArray) => {
+
+    for (let i = 0; i < postsArray.length; i++) {
+        const postId = postsArray[i].id;
+        
+        const url = `https://graph.facebook.com/${postId}?fields=caption&access_token=${accessToken}`
+        const data = await fetch(url)
+        const post = await data.json()
+
+        console.log(post.caption);
+    }
+    }
+
+  const getPostsFb = async (accessToken) => {
+      const url = `https://graph.facebook.com/me?fields=posts&access_token=${accessToken}`
+      const data = await fetch(url)
+      const posts = await data.json()
+
+      console.log(posts);
+
+      const postsArray = posts.posts.data
+      getSinglePostsFb(accessToken, postsArray)
+      
+  }
+
+   FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        var accessToken = response.authResponse.accessToken;
+        console.log(accessToken);
+
+
+       getPostsFb(accessToken)
+
+      } 
+      else {
+          console.log('not connected');
+      }
+    } );
+
+
 
 
 // Get and display FB MEDIA
@@ -123,15 +167,6 @@ const displayMediaFb = async (object) => {
 
 }
 
-const getMediaFb = async () => {
-    const url = `https://graph.facebook.com/me?fields=name,posts&access_token=${keyFB}`
-    // const data = await fetch(url)
-    // const profile = await data.json()
-
-    // displayMediaFb(profile)
-}
-
-getMediaFb()
 
 
 
@@ -213,12 +248,11 @@ getMediaLinkedin()
 const queryString = window.location.search
 const params = new URLSearchParams(queryString)
 const code = params.get('code')
-    console.log(`Autherization Code: ${code}`);
+    console.log(`Authorization Code: ${code}`);
 
 const url = "https://open.tiktokapis.com/v2/oauth/token/"
 const header = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Cache-Control': 'no-cache'
+    'Content-Type': 'application/x-www-form-urlencoded'
 }
 const body = {
     'client_key': 'aw4uv5g4eat1jc2m',
@@ -230,14 +264,21 @@ const body = {
 
 const getAccessToken = async () => {
     const response = await fetch(url, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        redirect: "follow",
-        body: JSON.stringify( body ),
+        method    : "POST",
+        mode      : "no-cors",
+        cache     : "no-cache",
+        headers   : {
+            "Content-Type"  : "application/json"
+            },
+        redirect  : "follow",
+        body      : JSON.stringify( body ),
+
+        // method: 'POST',
+        // mode: 'cors',
+        // cache: 'no-cache',
+        // credentials: 'same-origin',
+        // headers: header,
+        // body: body
     })
 
     data = await response.json()
